@@ -17,6 +17,7 @@ You'll now have a `build` folder with the executable version of the app.
 # TODO
 - Easier installation
 - Create released with prebuilt binaries
+- An actual icon
 
 # License
 ```
