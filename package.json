@@ -1,7 +1,7 @@
 {
   "name": "away-from-discord",
   "version": "0.1.0",
-  "description": "Displays an AFK rich-presence when you're away",
+  "description": "Displays an AFK rich-presence while you're away",
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon -e js,ts --watch src --exec \"npm run build:ts && npm run start\"",
