@@ -1,0 +1,25 @@
+{
+    "clientId": "some number",
+    "rpcRefreshInterval": 15,
+    "idleTimeMinimum": 300,
+    "idleCheckInterval": 10,
+    "activity": {
+        "details": "details",
+        "state": "state",
+        "largeImageKey": "",
+        "largeImageText": "big text",
+        "smallImageKey": "",
+        "smallImageText": "small text",
+        "instance": false,
+        "buttons": [
+            {
+                "label": "text 1",
+                "url": "https://google.com"
+            },
+            {
+                "label": "text 2",
+                "url": "https://github.com/X-Legendary"
+            }
+        ]
+    }
+}

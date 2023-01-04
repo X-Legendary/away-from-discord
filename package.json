@@ -1,0 +1,32 @@
+{
+  "name": "away-from-discord",
+  "version": "0.1.0",
+  "description": "Displays an AFK rich-presence when you're away",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon -e js,ts --watch src --exec \"npm run build:ts && npm run start\"",
+    "build:ts": "tsc",
+    "build": "powershell scripts/build.ps1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/X-Legendary/away-from-discord.git"
+  },
+  "author": "X-Legendary",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/X-Legendary/away-from-discord/issues"
+  },
+  "homepage": "https://github.com/X-Legendary/away-from-discord#readme",
+  "devDependencies": {
+    "@types/discord-rpc": "^4.0.3",
+    "electron": "^22.0.0",
+    "electron-packager": "^17.1.1",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1"
+  }
+}
