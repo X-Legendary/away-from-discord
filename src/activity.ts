@@ -22,12 +22,14 @@ class Activity {
     }
 
     update(newActivity?: DiscordRPC.Presence) {
-        if(newActivity) this.activity = { ...newActivity, ...{ startTimestamp: this.startTimestamp } }
+        if(newActivity) this.activity = newActivity
+        this.activity.startTimestamp = this.startTimestamp
         this.client.setActivity(this.activity)
     }
     
     setStartTimestamp(newStartTimestamp: Date) {
         this.startTimestamp = newStartTimestamp
+        this.activity.startTimestamp = this.startTimestamp
     }
 
     disconnect() {

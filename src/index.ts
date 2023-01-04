@@ -9,20 +9,22 @@ let isIdle = false
 let isEnabled = true
 const idleCheck = () => {
     const idleTime = powerMonitor.getSystemIdleTime()
-    if(idleTime < config.idleTimeMinimum) return isIdle = false
+    if(powerMonitor.getSystemIdleState(config.idleTimeMinimum) === "active") return isIdle = false
+    //if(idleTime < config.idleTimeMinimum) return isIdle = false
 
     activity.setStartTimestamp(new Date(Date.now() - idleTime * 1000))
     isIdle = true
 }
 
 const update = () => {
+    if(!isEnabled) return
     if(!isIdle) return activity.clear()
     activity.update()
 }
 
 const updateTray = () => {
     const menu = Menu.buildFromTemplate([
-        { label: `${app.getName()} v${app.getVersion()}`, enabled: false },
+        { label: `Away from Discord v${app.getVersion()}`, enabled: false },
         { type: "separator" },
         { label: "Enabled", type: "checkbox", checked: isEnabled,
             click: () => {
@@ -53,13 +55,21 @@ const updateTray = () => {
     tray.setContextMenu(menu)
 }
 
+powerMonitor.on("lock-screen", () => {
+    isIdle = true
+})
+
+powerMonitor.on("unlock-screen", () => {
+    isIdle = false
+})
+
 app.on("ready", () => {
     console.log("Electron app is ready!")
     setInterval(idleCheck, (config.idleCheckInterval < 5 ? 5_000 : config.idleCheckInterval * 1000))
     setInterval(update, (config.rpcRefreshInterval < 15 ? 15_000 : config.rpcRefreshInterval * 1000))
 
     tray = new Tray("./icon.ico")
-    tray.setToolTip(`${app.getName()} v${app.getVersion()}`)
+    tray.setToolTip(`Away from Discord v${app.getVersion()}`)
     updateTray()
 })
 
