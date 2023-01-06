@@ -1,6 +1,6 @@
 import { app , powerMonitor, Tray, Menu, shell } from "electron"
 import Activity from "./activity"
-const config = JSON.parse(require("fs").readFileSync("./config.json", "utf8")) // lazy
+const config = JSON.parse(require("fs").readFileSync(require("path").join(app.getAppPath(), "./config.json"), "utf8")) // lazy
 
 const activity = new Activity(config.clientId, config.activity)
 
@@ -71,6 +71,10 @@ app.on("ready", () => {
     tray = new Tray("./icon.ico")
     tray.setToolTip(`Away from Discord v${app.getVersion()}`)
     updateTray()
+})
+
+powerMonitor.on("shutdown", () => {
+    app.quit()
 })
 
 app.on("before-quit", () => {
