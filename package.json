@@ -7,6 +7,7 @@
     "dev": "nodemon -e js,ts --watch src --exec \"npm run build:ts && npm run start\"",
     "build:ts": "tsc",
     "build": "powershell scripts/build.ps1",
+    "build:all": "powershell scripts/build.ps1 all",
     "start": "electron ."
   },
   "repository": {
