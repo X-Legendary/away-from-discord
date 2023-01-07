@@ -63,18 +63,18 @@ powerMonitor.on("unlock-screen", () => {
     isIdle = false
 })
 
+powerMonitor.on("shutdown", () => {
+    app.quit()
+})
+
 app.on("ready", () => {
     console.log("Electron app is ready!")
     setInterval(idleCheck, (config.idleCheckInterval < 5 ? 5_000 : config.idleCheckInterval * 1000))
     setInterval(update, (config.rpcRefreshInterval < 15 ? 15_000 : config.rpcRefreshInterval * 1000))
 
-    tray = new Tray("./icon.ico")
+    tray = new Tray(require("path").join(app.getAppPath(), "./icon.ico"))
     tray.setToolTip(`Away from Discord v${app.getVersion()}`)
     updateTray()
-})
-
-powerMonitor.on("shutdown", () => {
-    app.quit()
 })
 
 app.on("before-quit", () => {
