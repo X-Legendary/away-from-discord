@@ -2,7 +2,7 @@ $package = Get-Content -Path package.json | ConvertFrom-Json
 $version = $package.version
 
 npm run build:ts # tsc
-if ( $lastexitcode -ne 0 ) { exit }
+if ($lastexitcode -ne 0) { exit }
 
 cd dist
 del *.json
@@ -37,7 +37,7 @@ if ($Args[0] -eq "all") {
     Write-Host "Building for current platform only..."
     node scripts/build.js
 }
-if ( $lastexitcode -ne 0 ) { exit }
+if ($lastexitcode -ne 0) { exit }
 
 # Finish and copy over config
 $builds = Get-ChildItem -Path "./build"
@@ -69,6 +69,8 @@ if(!(Check-Command 7z)) {
     exit
 }
 
-foreach($build in $builds) {
-    7z a -tzip "./build/$build-v$version.zip" $build.FullName
+if($Args[0] -eq "all") {
+    foreach($build in $builds) {
+        7z a -tzip "./build/$build-v$version.zip" $build.FullName
+    }
 }
